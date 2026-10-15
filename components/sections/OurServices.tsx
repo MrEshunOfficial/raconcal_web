@@ -43,7 +43,7 @@ function GroupHeading({ index, title, children }: { index: string; title: string
 
 export default function OurServices() {
   return (
-    <section id="services" className="mx-auto max-w-6xl scroll-mt-16 px-4 py-14 sm:px-6 sm:py-20">
+    <section id="services" className="mx-auto max-w-6xl scroll-mt-16 px-4 pt-6 pb-14 sm:px-6 sm:pb-20">
       <div className="mb-10 flex flex-col gap-4 sm:mb-14 md:flex-row md:items-end md:justify-between">
         <div className="flex flex-col gap-4">
           <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
