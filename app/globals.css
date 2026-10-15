@@ -187,3 +187,41 @@
     stroke-dashoffset: 0;
   }
 }
+
+/* Carousels: the incoming slide slides and fades in over the outgoing one,
+   which stays opaque underneath so the background never flashes through.
+   --carousel-dir is 1 (forward) or -1 (back). */
+@keyframes carousel-in {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--carousel-dir, 1) * 6%)) scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes carousel-out {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translateX(calc(var(--carousel-dir, 1) * -3%));
+  }
+}
+
+.carousel-in {
+  animation: carousel-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.carousel-out {
+  animation: carousel-out 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-in,
+  .carousel-out {
+    animation-duration: 1ms;
+  }
+}

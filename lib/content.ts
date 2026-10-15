@@ -25,27 +25,13 @@ export const stats = [
   { value: "13", label: "Services" },
 ];
 
-export const processSlides = [
-  {
-    src: `${IMG}/process-ceiling-framing.jpg`,
-    alt: "Team fixing gypsum boards to the ceiling frame on scaffolding",
-    caption: "Framing & boarding",
-  },
-  {
-    src: `${IMG}/process-ceiling-opening.jpg`,
-    alt: "Ceiling opening left for ducting and services",
-    caption: "Services coordinated in the ceiling void",
-  },
-  {
-    src: `${IMG}/process-ceiling-boarding.jpg`,
-    alt: "Drop ceiling being boarded around the steel grid",
-    caption: "Levels and coves set out",
-  },
-  {
-    src: `${IMG}/office-cove-ceiling-downlights.jpg`,
-    alt: "Finished tray ceiling with warm cove light and downlights",
-    caption: "The finished result",
-  },
+// Tall photos only: the About banner shows each one full-height beside the text.
+export const aboutImages = [
+  { src: `${IMG}/ceiling-tiered-cove-pendant.jpg`, alt: "Tiered cove ceiling with a pendant light" },
+  { src: `${IMG}/office-stepped-ceiling-02.jpg`, alt: "Stepped office ceiling with warm cove light and spotlights" },
+  { src: `${IMG}/corridor-linear-led-glass.jpg`, alt: "Corridor with linear LED ceiling lights and a glass door" },
+  { src: `${IMG}/office-cove-ceiling-downlights.jpg`, alt: "Finished tray ceiling with warm cove light and downlights" },
+  { src: `${IMG}/office-cove-ceiling-spotlights-02.jpg`, alt: "Office ceiling with cove lighting and spotlights by the window" },
 ];
 
 export const services = [

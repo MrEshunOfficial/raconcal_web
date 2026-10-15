@@ -1,46 +1,36 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { services } from "@/lib/content";
+import { useCarousel } from "../Carousel";
 
 const SLIDE_MS = 5500;
 const EASE = "ease-[cubic-bezier(0.22,1,0.36,1)]";
 
 export default function HeroRight() {
-  const [index, setIndex] = useState(0);
-  const [prev, setPrev] = useState<number | null>(null);
-  const [paused, setPaused] = useState(false);
-  const touchX = useRef<number | null>(null);
   const count = services.length;
-  const next = (index + 1) % count;
-
-  const goTo = (i: number) => {
-    if (i === index) return;
-    setPrev(index);
-    setIndex((i + count) % count);
-  };
+  const { index, prev, goTo, next, swipe, slideClass, style } = useCarousel(count);
+  const [paused, setPaused] = useState(false);
+  const upcoming = (index + 1) % count;
+  // The card's previous image stays underneath while the new one fades in.
+  const previousUpcoming = prev === null ? null : (prev + 1) % count;
 
   return (
     <div
       className="relative w-full"
+      style={style}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}>
       <div
-        className="relative h-[92svh] max-h-[900px] min-h-[600px] overflow-hidden bg-muted lg:aspect-[4/5] lg:h-auto lg:max-h-none lg:min-h-0 lg:rounded-2xl lg:shadow-2xl lg:shadow-foreground/10"
+        className="group/carousel relative h-[92svh] max-h-[900px] min-h-[600px] overflow-hidden bg-neutral-900 lg:aspect-[4/5] lg:h-auto lg:max-h-none lg:min-h-0 lg:rounded-2xl lg:shadow-2xl lg:shadow-foreground/10"
         aria-roledescription="carousel"
         aria-label="Our services"
-        onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
-        onTouchEnd={(e) => {
-          if (touchX.current === null) return;
-          const dx = e.changedTouches[0].clientX - touchX.current;
-          if (Math.abs(dx) > 40) goTo(index + (dx < 0 ? 1 : -1));
-          touchX.current = null;
-        }}>
+        {...swipe}>
         {services.map((service, i) => {
           const active = i === index;
           return (
@@ -49,30 +39,23 @@ export default function HeroRight() {
               aria-roledescription="slide"
               aria-label={`${i + 1} of ${count}: ${service.title}`}
               aria-hidden={!active}
-              className={cn(
-                "absolute inset-0 transition-[opacity,transform] duration-1000 motion-reduce:transition-none",
-                EASE,
-                active
-                  ? "z-10 translate-x-0 opacity-100"
-                  : i === prev
-                    ? "-translate-x-[12%] opacity-0"
-                    : "translate-x-[12%] opacity-0"
-              )}>
+              className={cn("absolute inset-0", slideClass(i))}>
               <Image
                 src={service.image}
                 alt=""
                 fill
                 preload={i === 0}
+                loading={i === 0 ? undefined : "eager"}
                 sizes="(min-width: 1024px) 560px, 100vw"
                 className={cn(
                   "object-cover transition-transform ease-out motion-reduce:transition-none",
-                  active ? "scale-100 duration-[6000ms]" : "scale-110 duration-1000"
+                  active ? "scale-100 duration-[6000ms]" : "scale-105 duration-1000"
                 )}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/30 lg:from-black/85 lg:via-black/50 lg:to-transparent" />
               <p
                 className={cn(
-                  "absolute top-5 left-4 text-xs font-medium tracking-[0.2em] text-white/80 uppercase transition-[opacity,transform] duration-700 sm:left-6 lg:hidden",
+                  "absolute top-6 right-4 left-4 truncate text-xs font-medium tracking-[0.2em] text-white/80 uppercase transition-[opacity,transform] duration-700 sm:left-6 lg:hidden",
                   EASE,
                   active ? "translate-y-0 opacity-100 delay-300" : "-translate-y-2 opacity-0"
                 )}>
@@ -108,7 +91,7 @@ export default function HeroRight() {
           );
         })}
 
-        <div className="invisible absolute right-8 bottom-6 left-44 z-20 flex gap-1.5 lg:visible">
+        <div className="invisible absolute right-8 bottom-6 left-44 z-30 flex gap-1.5 lg:visible">
           {services.map((service, i) => (
             <button
               key={service.title}
@@ -120,7 +103,7 @@ export default function HeroRight() {
               <span className="absolute inset-x-0 top-1/2 h-0.5 -translate-y-1/2 overflow-hidden rounded-full bg-white/30 transition-colors group-hover:bg-white/50">
                 <span
                   key={i === index ? `active-${index}` : "idle"}
-                  onAnimationEnd={() => i === index && goTo(index + 1)}
+                  onAnimationEnd={() => i === index && next()}
                   className={cn(
                     "absolute inset-0 origin-left rounded-full bg-white motion-reduce:animate-none",
                     i < index ? "scale-x-100" : "scale-x-0"
@@ -142,29 +125,32 @@ export default function HeroRight() {
 
       <button
         type="button"
-        onClick={() => goTo(next)}
-        aria-label={`Next: ${services[next].title}`}
-        className="group absolute -bottom-8 -left-4 z-20 hidden w-48 overflow-hidden rounded-xl border-4 border-background bg-muted text-left shadow-xl lg:-left-10 lg:block">
+        onClick={next}
+        aria-label={`Next: ${services[upcoming].title}`}
+        className="group absolute -bottom-8 -left-10 z-20 hidden w-48 overflow-hidden rounded-xl border-4 border-background bg-neutral-900 text-left shadow-xl lg:block">
         <div className="relative aspect-[4/5]">
           {services.map((service, i) => (
-            <Image
+            <div
               key={service.title}
-              src={service.image}
-              alt=""
-              fill
-              sizes="192px"
               className={cn(
-                "object-cover transition-[opacity,transform] duration-1000 group-hover:scale-105",
-                EASE,
-                i === next ? "opacity-100" : "opacity-0"
-              )}
-            />
+                "absolute inset-0",
+                i === upcoming ? "z-10 carousel-in" : i === previousUpcoming ? "z-0" : "z-0 opacity-0"
+              )}>
+              <Image
+                src={service.image}
+                alt=""
+                fill
+                loading="eager"
+                sizes="192px"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
           ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 p-3 text-white">
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 z-10 p-3 text-white">
             <p className="text-[10px] font-medium tracking-[0.2em] text-white/70 uppercase">Next</p>
             <p className="flex items-center gap-1 text-sm font-medium leading-tight">
-              {services[next].title}
+              {services[upcoming].title}
               <ArrowRight className="size-3.5 shrink-0 transition-transform group-hover:translate-x-0.5" />
             </p>
           </div>
