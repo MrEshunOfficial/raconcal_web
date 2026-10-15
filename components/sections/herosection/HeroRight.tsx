@@ -25,13 +25,13 @@ export default function HeroRight() {
 
   return (
     <div
-      className="relative mx-auto w-full max-w-md lg:max-w-none"
+      className="relative w-full"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}>
       <div
-        className="relative aspect-square overflow-hidden rounded-2xl bg-muted shadow-2xl shadow-foreground/10 sm:aspect-[4/5]"
+        className="relative h-[92svh] max-h-[900px] min-h-[600px] overflow-hidden bg-muted lg:aspect-[4/5] lg:h-auto lg:max-h-none lg:min-h-0 lg:rounded-2xl lg:shadow-2xl lg:shadow-foreground/10"
         aria-roledescription="carousel"
         aria-label="Our services"
         onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
@@ -69,16 +69,26 @@ export default function HeroRight() {
                   active ? "scale-100 duration-[6000ms]" : "scale-110 duration-1000"
                 )}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent sm:via-black/50" />
-              <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-5 pb-6 text-white sm:gap-3 sm:p-8 sm:pb-52 lg:pb-60">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/30 lg:from-black/85 lg:via-black/50 lg:to-transparent" />
+              <p
+                className={cn(
+                  "absolute top-5 left-4 text-xs font-medium tracking-[0.2em] text-white/80 uppercase transition-[opacity,transform] duration-700 sm:left-6 lg:hidden",
+                  EASE,
+                  active ? "translate-y-0 opacity-100 delay-300" : "-translate-y-2 opacity-0"
+                )}>
+                <span className="tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                <span className="mx-2 text-white/40">/</span>
+                {service.title}
+              </p>
+              <div className="absolute inset-x-0 bottom-0 hidden flex-col gap-3 p-8 pb-60 text-white lg:flex">
                 {[
                   <p key="n" className="text-xs font-medium tracking-[0.2em] text-white/70 uppercase tabular-nums">
                     {String(i + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
                   </p>,
-                  <p key="t" className="font-heading text-2xl font-medium tracking-tight sm:text-4xl">
+                  <p key="t" className="font-heading text-4xl font-medium tracking-tight">
                     {service.title}
                   </p>,
-                  <p key="d" className="line-clamp-2 max-w-sm text-sm text-white/80 sm:line-clamp-none sm:text-base">
+                  <p key="d" className="max-w-sm text-base text-white/80">
                     {service.description}
                   </p>,
                 ].map((el, j) => (
@@ -98,7 +108,7 @@ export default function HeroRight() {
           );
         })}
 
-        <div className="invisible absolute inset-x-5 bottom-4 z-20 flex gap-1.5 sm:visible sm:right-8 sm:bottom-6 sm:left-44">
+        <div className="invisible absolute right-8 bottom-6 left-44 z-20 flex gap-1.5 lg:visible">
           {services.map((service, i) => (
             <button
               key={service.title}
@@ -134,7 +144,7 @@ export default function HeroRight() {
         type="button"
         onClick={() => goTo(next)}
         aria-label={`Next: ${services[next].title}`}
-        className="group absolute -bottom-8 -left-4 z-20 hidden w-40 overflow-hidden rounded-xl border-4 border-background bg-muted text-left shadow-xl sm:block lg:-left-10 lg:w-48">
+        className="group absolute -bottom-8 -left-4 z-20 hidden w-48 overflow-hidden rounded-xl border-4 border-background bg-muted text-left shadow-xl lg:-left-10 lg:block">
         <div className="relative aspect-[4/5]">
           {services.map((service, i) => (
             <Image
