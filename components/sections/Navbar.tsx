@@ -1,5 +1,6 @@
 import React from "react";
 import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { navLinks, site } from "@/lib/content";
 import MobileMenu from "./MobileMenu";
 
@@ -20,7 +21,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <a href="#contact" className={buttonVariants({ size: "lg", className: "hidden md:inline-flex" })}>
+        <a href="#contact" className={cn(buttonVariants({ size: "lg" }), "hidden md:inline-flex")}>
           Get a quote
         </a>
         <MobileMenu />

@@ -5,9 +5,10 @@ import { site, stats } from "@/lib/content";
 
 const rise = (step: number) => ({ animationDelay: `${step * 120}ms` });
 
-export default function HeroLeft() {
+// Name, headline, description and actions.
+export function HeroIntro() {
   return (
-    <div className="flex flex-col gap-8 sm:gap-10">
+    <div className="flex flex-col gap-6 sm:gap-10">
       <p className="hero-rise text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase" style={rise(0)}>
         {site.name}
       </p>
@@ -38,7 +39,7 @@ export default function HeroLeft() {
         Interior finishing, security installations and building materials for homes and offices across Accra,
         all from one trusted team.
       </p>
-      <div className="hero-rise flex items-center gap-6" style={rise(3)}>
+      <div className="hero-rise hidden items-center gap-6 sm:flex" style={rise(3)}>
         <a href="#contact" className={buttonVariants({ size: "lg", className: "h-11 px-5" })}>
           Start your project <ArrowRight data-icon="inline-end" />
         </a>
@@ -46,27 +47,35 @@ export default function HeroLeft() {
           Our services
         </a>
       </div>
-      <div className="hero-rise flex flex-col gap-5 border-t pt-6" style={rise(4)}>
-        <dl className="grid max-w-md grid-cols-3 gap-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col gap-1">
-              <dt className="order-2 text-xs text-muted-foreground">{stat.label}</dt>
-              <dd className="font-heading text-2xl font-medium sm:text-3xl">{stat.value}</dd>
-            </div>
-          ))}
-        </dl>
-        <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-muted-foreground">
-          <a
-            href={`tel:${site.phones[0].replace(/\s/g, "")}`}
-            className="flex items-center gap-2 transition-colors hover:text-foreground">
-            <Phone className="size-4" />
-            {site.phones[0]}
-          </a>
-          <span className="flex items-center gap-2">
-            <MapPin className="size-4" />
-            Kotoku, Medie · Accra
-          </span>
-        </div>
+    </div>
+  );
+}
+
+// Figures and contact line. Sits under the slider on phones, under the intro on desktop.
+export function HeroMeta() {
+  const phone = site.phones[0];
+
+  return (
+    <div className="hero-rise flex flex-col gap-5 border-t pt-6" style={rise(4)}>
+      <dl className="flex gap-10 sm:gap-14">
+        {stats.map((stat) => (
+          <div key={stat.label} className="flex flex-col gap-0.5">
+            <dt className="order-2 text-xs tracking-[0.15em] text-muted-foreground uppercase">{stat.label}</dt>
+            <dd className="font-heading text-2xl font-medium sm:text-3xl">{stat.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-muted-foreground">
+        <a
+          href={`tel:${phone.replace(/\s/g, "")}`}
+          className="flex items-center gap-2 transition-colors hover:text-foreground">
+          <Phone className="size-4" />
+          {phone}
+        </a>
+        <span className="flex items-center gap-2">
+          <MapPin className="size-4" />
+          Kotoku, Medie · Accra
+        </span>
       </div>
     </div>
   );

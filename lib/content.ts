@@ -20,9 +20,9 @@ export const navLinks = [
 ];
 
 export const stats = [
-  { value: "5+", label: "Years in business" },
-  { value: "100+", label: "Projects completed" },
-  { value: "13", label: "Services offered" },
+  { value: "5+", label: "Years" },
+  { value: "100+", label: "Projects" },
+  { value: "13", label: "Services" },
 ];
 
 export const processSlides = [

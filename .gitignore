@@ -44,3 +44,6 @@ next-env.d.ts
 
 # third-party reference images (not ours to publish)
 design-reference/
+
+# client documents (invoices etc.), never commit or deploy
+private/

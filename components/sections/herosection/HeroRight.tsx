@@ -31,7 +31,7 @@ export default function HeroRight() {
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}>
       <div
-        className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted shadow-2xl shadow-foreground/10 sm:aspect-[4/5]"
+        className="relative aspect-square overflow-hidden rounded-2xl bg-muted shadow-2xl shadow-foreground/10 sm:aspect-[4/5]"
         aria-roledescription="carousel"
         aria-label="Our services"
         onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
@@ -70,7 +70,7 @@ export default function HeroRight() {
                 )}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent sm:via-black/50" />
-              <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-5 pb-9 text-white sm:gap-3 sm:p-8 sm:pb-52 lg:pb-60">
+              <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-5 pb-6 text-white sm:gap-3 sm:p-8 sm:pb-52 lg:pb-60">
                 {[
                   <p key="n" className="text-xs font-medium tracking-[0.2em] text-white/70 uppercase tabular-nums">
                     {String(i + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
@@ -78,7 +78,7 @@ export default function HeroRight() {
                   <p key="t" className="font-heading text-2xl font-medium tracking-tight sm:text-4xl">
                     {service.title}
                   </p>,
-                  <p key="d" className="max-w-sm text-sm text-white/80 sm:text-base">
+                  <p key="d" className="line-clamp-2 max-w-sm text-sm text-white/80 sm:line-clamp-none sm:text-base">
                     {service.description}
                   </p>,
                 ].map((el, j) => (
@@ -98,7 +98,7 @@ export default function HeroRight() {
           );
         })}
 
-        <div className="absolute inset-x-5 bottom-4 z-20 flex gap-1.5 sm:right-8 sm:bottom-6 sm:left-44">
+        <div className="invisible absolute inset-x-5 bottom-4 z-20 flex gap-1.5 sm:visible sm:right-8 sm:bottom-6 sm:left-44">
           {services.map((service, i) => (
             <button
               key={service.title}
