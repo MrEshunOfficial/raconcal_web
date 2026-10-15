@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { navLinks } from "@/lib/content";
 
 export default function MobileMenu() {
@@ -46,12 +46,6 @@ export default function MobileMenu() {
               </li>
             ))}
           </ul>
-          <a
-            href="#contact"
-            onClick={() => setOpen(false)}
-            className={buttonVariants({ size: "lg", className: "mt-auto h-12 w-full text-base" })}>
-            Get a quote
-          </a>
         </div>
       )}
     </div>

@@ -1,6 +1,4 @@
 import React from "react";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { navLinks, site } from "@/lib/content";
 import MobileMenu from "./MobileMenu";
 
@@ -21,9 +19,6 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <a href="#contact" className={cn(buttonVariants({ size: "lg" }), "hidden md:inline-flex")}>
-          Get a quote
-        </a>
         <MobileMenu />
       </nav>
       {/* Fills left to right as you read down the page. */}

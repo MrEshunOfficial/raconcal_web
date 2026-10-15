@@ -57,7 +57,7 @@ export default function QuickContact() {
           tabIndex={show ? 0 : -1}
           className="flex h-12 flex-1 items-center justify-center gap-2 rounded-full border border-primary-foreground/20 bg-primary font-medium text-primary-foreground shadow-lg shadow-foreground/20">
           <MessageCircle className="size-5" />
-          Get a free quote
+          Get in touch
         </a>
       </div>
 
@@ -78,7 +78,7 @@ export default function QuickContact() {
         </span>
         <span className="grid grid-cols-[0fr] transition-[grid-template-columns] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grid-cols-[1fr] group-focus-visible:grid-cols-[1fr]">
           <span className="overflow-hidden whitespace-nowrap">
-            <span className="block pl-2 font-medium">Get a free quote</span>
+            <span className="block pl-2 font-medium">Get in touch</span>
           </span>
         </span>
       </a>
