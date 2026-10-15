@@ -18,9 +18,9 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Raconcal Ventures | Ceilings, Lighting & Interiors",
+  title: "Raconcal Ventures | Interiors, Security & Building Supplies",
   description:
-    "Gypsum and POP ceilings, cove and LED lighting, feature walls, glass partitions and office fit-outs.",
+    "Ceilings, partitions, wall cladding, aluminium glazing and lighting, plus CCTV, electric fencing, access control and gate automation. Building materials supplied. Based in Accra.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

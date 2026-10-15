@@ -1,13 +1,14 @@
 import React from "react";
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { navLinks, site } from "@/lib/content";
 
 export default function FooterSection() {
   const contacts = [
-    { icon: Phone, label: site.phone, href: `tel:${site.phone.replace(/\s/g, "")}` },
+    ...site.phones.map((phone) => ({ icon: Phone, label: phone, href: `tel:${phone.replace(/\s/g, "")}` })),
     { icon: Mail, label: site.email, href: `mailto:${site.email}` },
-    { icon: MapPin, label: site.location },
+    { icon: MapPin, label: site.location, href: undefined },
+    { icon: Send, label: site.postal, href: undefined },
   ];
 
   return (
@@ -58,7 +59,7 @@ export default function FooterSection() {
       <div className="border-t">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-6 text-center text-sm text-muted-foreground sm:flex-row sm:text-left sm:px-6">
           <p>
-            © {new Date().getFullYear()} {site.name}. {site.tagline}
+            © {new Date().getFullYear()} {site.name}. {site.slogan}
           </p>
           <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             {navLinks.map((link) => (

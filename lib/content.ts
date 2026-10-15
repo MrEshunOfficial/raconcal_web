@@ -1,14 +1,15 @@
 const IMG = "/images/raconcal_images";
 const VID = "/images/raconcal_videos";
 
-// TODO: replace placeholder contact details with the real ones.
 export const site = {
   name: "Raconcal Ventures",
-  tagline: "Ceilings, lighting & interiors, finished with care.",
-  phone: "+000 000 000 000",
-  email: "hello@raconcal.com",
-  location: "Your city, Country",
-  whatsapp: "https://wa.me/000000000000",
+  slogan: "Build in styles.",
+  tagline: "Interiors, security & building supplies.",
+  phones: ["+233 24 759 1129", "+233 27 612 2088"],
+  email: "raconcalventures@gmail.com",
+  location: "Kotoku, Medie, off Nsawam Road, Accra",
+  postal: "P.O. Box LT 314, Lartebiokorshie, Accra",
+  whatsapp: "https://wa.me/233247591129",
 };
 
 export const navLinks = [
@@ -18,21 +19,10 @@ export const navLinks = [
   { href: "#contact", label: "Contact" },
 ];
 
-export const heroImages = {
-  main: {
-    src: `${IMG}/corridor-linear-led-glass.jpg`,
-    alt: "Office corridor with recessed linear LED lines and glass partitions",
-  },
-  accent: {
-    src: `${IMG}/feature-wall-oval-niches.jpg`,
-    alt: "Feature wall with three back-lit oval niches",
-  },
-};
-
 export const stats = [
-  { value: "Gypsum", label: "& POP ceilings" },
-  { value: "LED", label: "cove & linear lighting" },
-  { value: "Turnkey", label: "office fit-outs" },
+  { value: "5+", label: "Years in business" },
+  { value: "100+", label: "Projects completed" },
+  { value: "13", label: "Services offered" },
 ];
 
 export const processSlides = [
@@ -61,9 +51,9 @@ export const processSlides = [
 export const services = [
   {
     icon: "layers",
-    title: "Gypsum & POP Ceilings",
+    title: "Ceilings & Partitions",
     description:
-      "Tray, stepped and drop ceilings built on steel frames, with clean shadow gaps and seamless joints.",
+      "Gypsum, POP, plaster board and acoustic ceilings, plus partition walls, built on steel frames with seamless joints.",
     image: `${IMG}/office-stepped-ceiling-01.jpg`,
   },
   {
@@ -75,26 +65,62 @@ export const services = [
   },
   {
     icon: "sparkles",
-    title: "Feature Walls",
+    title: "Wall Cladding & Feature Walls",
     description:
-      "Back-lit niches and sculpted wall details that give a room its signature moment.",
+      "Cement board and decorative cladding, wallpaper and back-lit feature walls, inside and out.",
     image: `${IMG}/feature-wall-oval-niches.jpg`,
   },
   {
     icon: "panels",
-    title: "Glass Partitions",
+    title: "Aluminium Glazing",
     description:
-      "Framed glass walls and doors that divide offices while keeping them bright and open.",
+      "Aluminium-framed windows, doors and glass partitions that keep spaces bright and open.",
     image: `${IMG}/glass-partition-wall.jpg`,
   },
   {
     icon: "building",
-    title: "Office Fit-outs",
+    title: "Office & Home Fit-outs",
     description:
-      "From bare shell to move-in ready: ceilings, lighting, partitions and finishes under one team.",
+      "From bare shell to move-in ready: ceilings, lighting, partitions, curtains and finishes under one team.",
     image: `${IMG}/office-cove-ceiling-window-view.jpg`,
   },
 ] as const;
+
+export const securityServices = [
+  {
+    icon: "cctv",
+    title: "CCTV Installation",
+    description: "Cameras and recording set up so you can watch your property from your phone.",
+  },
+  {
+    icon: "zap",
+    title: "Electric Fencing",
+    description: "Perimeter fencing that deters intruders before they reach the wall.",
+  },
+  {
+    icon: "fingerprint",
+    title: "Access Control",
+    description: "Card, code and fingerprint entry for offices, gates and restricted rooms.",
+  },
+  {
+    icon: "bell",
+    title: "Video Doorbells",
+    description: "See and speak to whoever is at the door, wherever you are.",
+  },
+  {
+    icon: "gate",
+    title: "Gate Automation",
+    description: "Motorised sliding and swing gates you open with a remote.",
+  },
+] as const;
+
+export const supplies = [
+  "Ceiling boards & accessories",
+  "Wall cladding boards",
+  "Wallpaper",
+  "Curtains",
+  "Building materials",
+];
 
 export const currentProject = {
   title: "High-rise office fit-out",

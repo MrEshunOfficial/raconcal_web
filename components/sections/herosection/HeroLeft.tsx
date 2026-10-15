@@ -1,40 +1,73 @@
 import React from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin, Phone } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-import { stats } from "@/lib/content";
+import { site, stats } from "@/lib/content";
+
+const rise = (step: number) => ({ animationDelay: `${step * 120}ms` });
 
 export default function HeroLeft() {
   return (
-    <div className="flex flex-col gap-6 sm:gap-8">
-      <p className="text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase">
-        Interior finishing & decor
+    <div className="flex flex-col gap-8 sm:gap-10">
+      <p className="hero-rise text-xs font-medium tracking-[0.2em] text-muted-foreground uppercase" style={rise(0)}>
+        {site.name}
       </p>
-      <h1 className="text-[2.5rem] leading-[1.1] font-medium sm:text-5xl lg:text-6xl">
-        Ceilings and light that make a space{" "}
-        <em className="font-normal">feel finished.</em>
+      <h1 className="hero-rise text-[2rem] leading-[1.15] font-medium sm:text-[2.75rem]" style={rise(1)}>
+        <span className="sm:whitespace-nowrap">Your Space, Elevated,</span>
+        <br />
+        Beyond{" "}
+        <span className="relative inline-block">
+          <em className="font-normal">Ordinary.</em>
+          <svg
+            viewBox="0 0 200 20"
+            preserveAspectRatio="none"
+            aria-hidden
+            className="absolute -bottom-1.5 left-0 h-2.5 w-full text-accent">
+            <path
+              d="M3 14 C 45 4, 110 3, 197 9"
+              pathLength={1}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={3}
+              strokeLinecap="round"
+              className="hero-draw"
+            />
+          </svg>
+        </span>
       </h1>
-      <p className="max-w-md text-base text-muted-foreground sm:text-lg">
-        We design and build gypsum ceilings, cove and LED lighting, feature
-        walls and glass partitions for homes and offices.
+      <p className="hero-rise max-w-sm text-base text-muted-foreground sm:text-lg" style={rise(2)}>
+        Interior finishing, security installations and building materials for homes and offices across Accra,
+        all from one trusted team.
       </p>
-      <div className="flex flex-col gap-3 sm:flex-row">
+      <div className="hero-rise flex items-center gap-6" style={rise(3)}>
         <a href="#contact" className={buttonVariants({ size: "lg", className: "h-11 px-5" })}>
           Start your project <ArrowRight data-icon="inline-end" />
         </a>
-        <a
-          href="#projects"
-          className={buttonVariants({ variant: "outline", size: "lg", className: "h-11 px-5" })}>
-          See our work
+        <a href="#services" className="text-sm font-medium underline-offset-4 hover:underline">
+          Our services
         </a>
       </div>
-      <dl className="grid grid-cols-3 gap-4 border-t pt-6">
-        {stats.map((stat) => (
-          <div key={stat.label}>
-            <dt className="font-heading text-lg font-medium sm:text-xl">{stat.value}</dt>
-            <dd className="text-xs text-muted-foreground sm:text-sm">{stat.label}</dd>
-          </div>
-        ))}
-      </dl>
+      <div className="hero-rise flex flex-col gap-5 border-t pt-6" style={rise(4)}>
+        <dl className="grid max-w-md grid-cols-3 gap-4">
+          {stats.map((stat) => (
+            <div key={stat.label} className="flex flex-col gap-1">
+              <dt className="order-2 text-xs text-muted-foreground">{stat.label}</dt>
+              <dd className="font-heading text-2xl font-medium sm:text-3xl">{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-muted-foreground">
+          <a
+            href={`tel:${site.phones[0].replace(/\s/g, "")}`}
+            className="flex items-center gap-2 transition-colors hover:text-foreground">
+            <Phone className="size-4" />
+            {site.phones[0]}
+          </a>
+          <span className="flex items-center gap-2">
+            <MapPin className="size-4" />
+            Kotoku, Medie · Accra
+          </span>
+        </div>
+      </div>
     </div>
   );
 }

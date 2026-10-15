@@ -3,8 +3,8 @@ import { Check } from "lucide-react";
 
 const points = [
   "Our own crew on site, from steel framing to final paint",
-  "Lighting planned with the ceiling, not added after",
-  "Ducts, AC cassettes and sprinklers neatly integrated",
+  "Ceilings, walls, glazing and security handled by one team",
+  "We supply the materials too, so one call covers the job",
   "Clean handover, on schedule",
 ];
 
@@ -15,13 +15,14 @@ export default function HeroText() {
         About us
       </p>
       <h2 className="text-3xl font-medium sm:text-4xl">
-        The details above your head matter.
+        One team. From bare walls to a secure, finished space.
       </h2>
       <p className="text-muted-foreground">
-        Raconcal Ventures is an interior finishing team specialising in
-        ceilings and architectural lighting. We take rooms from exposed services
-        and bare slabs to calm, well-lit spaces, and we handle every step
-        ourselves.
+        Raconcal Ventures specializes in building maintenance, interior
+        decoration, ceiling and cladding works, security installations, and
+        building materials. From individual services to complete projects, our
+        skilled team delivers quality workmanship, reliable service, and timely
+        completion.
       </p>
       <ul className="grid gap-3">
         {points.map((point) => (

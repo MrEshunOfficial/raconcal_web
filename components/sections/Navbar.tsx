@@ -8,7 +8,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <a href="#" className="font-heading text-xl font-semibold">
-          {site.name.split(" ")[0]}
+          {site.name}
           <span className="text-accent">.</span>
         </a>
         <ul className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
