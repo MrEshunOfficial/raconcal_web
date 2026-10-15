@@ -5,7 +5,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Index, previous index and direction for a looping carousel, plus swipe handlers.
-export function useCarousel(count: number) {
+// `fadeOut` makes the outgoing slide fade away too; use it when slides don't fill the frame.
+export function useCarousel(count: number, { fadeOut = false } = {}) {
   const [index, setIndex] = useState(0);
   const [prev, setPrev] = useState<number | null>(null);
   const [dir, setDir] = useState(1);
@@ -33,7 +34,13 @@ export function useCarousel(count: number) {
 
   // Active slide animates in on top; the previous one stays opaque beneath it.
   const slideClass = (i: number) =>
-    i === index ? "z-20 carousel-in" : i === prev ? "z-10 carousel-out" : "z-0 opacity-0";
+    i === index
+      ? "z-20 carousel-in"
+      : i === prev
+        ? fadeOut
+          ? "z-10 carousel-fade-out"
+          : "z-10 carousel-out"
+        : "z-0 opacity-0";
 
   const style = { "--carousel-dir": dir } as React.CSSProperties;
 

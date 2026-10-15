@@ -12,7 +12,8 @@ const EASE = "ease-[cubic-bezier(0.22,1,0.36,1)]";
 
 export default function HeroRight() {
   const count = services.length;
-  const { index, prev, goTo, next, swipe, slideClass, style } = useCarousel(count);
+  const { index, prev, goTo, next, swipe, slideClass, style } =
+    useCarousel(count);
   const [paused, setPaused] = useState(false);
   const upcoming = (index + 1) % count;
   // The card's previous image stays underneath while the new one fades in.
@@ -27,7 +28,7 @@ export default function HeroRight() {
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}>
       <div
-        className="group/carousel relative h-[92svh] max-h-[900px] min-h-[600px] overflow-hidden bg-neutral-900 lg:aspect-[4/5] lg:h-auto lg:max-h-none lg:min-h-0 lg:rounded-2xl lg:shadow-2xl lg:shadow-foreground/10"
+        className="group/carousel relative h-[92svh] max-h-225 min-h-150 overflow-hidden bg-neutral-900 lg:aspect-4/5 lg:h-auto lg:max-h-none lg:min-h-0 lg:rounded-2xl lg:shadow-2xl lg:shadow-foreground/10"
         aria-roledescription="carousel"
         aria-label="Our services"
         {...swipe}>
@@ -49,26 +50,37 @@ export default function HeroRight() {
                 sizes="(min-width: 1024px) 560px, 100vw"
                 className={cn(
                   "object-cover transition-transform ease-out motion-reduce:transition-none",
-                  active ? "scale-100 duration-[6000ms]" : "scale-105 duration-1000"
+                  active
+                    ? "scale-100 duration-6000"
+                    : "scale-105 duration-1000",
                 )}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/30 lg:from-black/85 lg:via-black/50 lg:to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/45 to-black/30 lg:from-black/85 lg:via-black/50 lg:to-transparent" />
               <p
                 className={cn(
                   "absolute top-6 right-4 left-4 truncate text-xs font-medium tracking-[0.2em] text-white/80 uppercase transition-[opacity,transform] duration-700 sm:left-6 lg:hidden",
                   EASE,
-                  active ? "translate-y-0 opacity-100 delay-300" : "-translate-y-2 opacity-0"
+                  active
+                    ? "translate-y-0 opacity-100 delay-300"
+                    : "-translate-y-2 opacity-0",
                 )}>
-                <span className="tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                <span className="tabular-nums">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <span className="mx-2 text-white/40">/</span>
                 {service.title}
               </p>
               <div className="absolute inset-x-0 bottom-0 hidden flex-col gap-3 p-8 pb-60 text-white lg:flex">
                 {[
-                  <p key="n" className="text-xs font-medium tracking-[0.2em] text-white/70 uppercase tabular-nums">
-                    {String(i + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
+                  <p
+                    key="n"
+                    className="text-xs font-medium tracking-[0.2em] text-white/70 uppercase tabular-nums">
+                    {String(i + 1).padStart(2, "0")} /{" "}
+                    {String(count).padStart(2, "0")}
                   </p>,
-                  <p key="t" className="font-heading text-4xl font-medium tracking-tight">
+                  <p
+                    key="t"
+                    className="font-heading text-4xl font-medium tracking-tight">
                     {service.title}
                   </p>,
                   <p key="d" className="max-w-sm text-base text-white/80">
@@ -77,11 +89,15 @@ export default function HeroRight() {
                 ].map((el, j) => (
                   <div
                     key={j}
-                    style={{ transitionDelay: active ? `${300 + j * 120}ms` : "0ms" }}
+                    style={{
+                      transitionDelay: active ? `${300 + j * 120}ms` : "0ms",
+                    }}
                     className={cn(
                       "transition-[opacity,transform] duration-700 motion-reduce:transition-none",
                       EASE,
-                      active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                      active
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-4 opacity-0",
                     )}>
                     {el}
                   </div>
@@ -106,7 +122,7 @@ export default function HeroRight() {
                   onAnimationEnd={() => i === index && next()}
                   className={cn(
                     "absolute inset-0 origin-left rounded-full bg-white motion-reduce:animate-none",
-                    i < index ? "scale-x-100" : "scale-x-0"
+                    i < index ? "scale-x-100" : "scale-x-0",
                   )}
                   style={
                     i === index
@@ -128,13 +144,17 @@ export default function HeroRight() {
         onClick={next}
         aria-label={`Next: ${services[upcoming].title}`}
         className="group absolute -bottom-8 -left-10 z-20 hidden w-48 overflow-hidden rounded-xl border-4 border-background bg-neutral-900 text-left shadow-xl lg:block">
-        <div className="relative aspect-[4/5]">
+        <div className="relative aspect-4/5">
           {services.map((service, i) => (
             <div
               key={service.title}
               className={cn(
                 "absolute inset-0",
-                i === upcoming ? "z-10 carousel-in" : i === previousUpcoming ? "z-0" : "z-0 opacity-0"
+                i === upcoming
+                  ? "z-10 carousel-in"
+                  : i === previousUpcoming
+                    ? "z-0"
+                    : "z-0 opacity-0",
               )}>
               <Image
                 src={service.image}
@@ -146,9 +166,11 @@ export default function HeroRight() {
               />
             </div>
           ))}
-          <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/70 to-transparent" />
+          <div className="absolute inset-0 z-10 bg-linear-to-t from-black/70 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 z-10 p-3 text-white">
-            <p className="text-[10px] font-medium tracking-[0.2em] text-white/70 uppercase">Next</p>
+            <p className="text-[10px] font-medium tracking-[0.2em] text-white/70 uppercase">
+              Next
+            </p>
             <p className="flex items-center gap-1 text-sm font-medium leading-tight">
               {services[upcoming].title}
               <ArrowRight className="size-3.5 shrink-0 transition-transform group-hover:translate-x-0.5" />

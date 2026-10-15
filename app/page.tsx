@@ -4,6 +4,7 @@ import FooterSection from "@/components/sections/FooterSection";
 import HeroSection from "@/components/sections/HeroParent";
 import Navbar from "@/components/sections/Navbar";
 import OurServices from "@/components/sections/OurServices";
+import QuickContact from "@/components/sections/QuickContact";
 
 export default function page() {
   return (
@@ -16,6 +17,7 @@ export default function page() {
         <CurrentProject />
       </main>
       <FooterSection />
+      <QuickContact />
     </>
   );
 }

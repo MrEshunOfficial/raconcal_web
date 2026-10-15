@@ -26,6 +26,8 @@ export default function Navbar() {
         </a>
         <MobileMenu />
       </nav>
+      {/* Fills left to right as you read down the page. */}
+      <span aria-hidden className="scroll-progress absolute inset-x-0 -bottom-px h-0.5 bg-accent" />
     </header>
   );
 }

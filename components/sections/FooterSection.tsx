@@ -14,7 +14,7 @@ export default function FooterSection() {
   return (
     <footer id="contact" className="scroll-mt-16">
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
-        <div className="grid gap-10 rounded-3xl bg-secondary p-6 sm:gap-12 sm:p-12 lg:grid-cols-[1.4fr_1fr]">
+        <div className="scroll-grow grid gap-10 rounded-3xl bg-secondary p-6 sm:gap-12 sm:p-12 lg:grid-cols-[1.4fr_1fr]">
           <div className="flex flex-col gap-6">
             <h2 className="text-3xl font-medium sm:text-4xl">
               Have a space that needs finishing?
@@ -25,7 +25,7 @@ export default function FooterSection() {
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <a
-                href={site.whatsapp}
+                href={site.whatsappQuote}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={buttonVariants({ size: "lg", className: "h-11 px-5" })}>

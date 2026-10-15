@@ -16,7 +16,7 @@ export default function AboutUsParent() {
       id="about"
       className="mx-auto max-w-6xl scroll-mt-16 px-4 py-4 sm:px-6 sm:py-6">
       <div
-        className="group/carousel relative flex min-h-150 items-end overflow-hidden rounded-2xl bg-neutral-900 sm:min-h-140 sm:rounded-3xl lg:aspect-video lg:min-h-0"
+        className="scroll-grow group/carousel relative flex min-h-150 items-end overflow-hidden rounded-2xl bg-neutral-900 sm:min-h-140 sm:rounded-3xl lg:aspect-video lg:min-h-0"
         style={style}
         aria-roledescription="carousel"
         aria-label="Our work on site"

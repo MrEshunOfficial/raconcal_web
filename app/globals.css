@@ -125,7 +125,7 @@
     @apply bg-background text-foreground;
   }
   html {
-    @apply font-sans scroll-smooth;
+    @apply font-sans;
   }
   h1,
   h2,
@@ -188,6 +188,82 @@
   }
 }
 
+/* Scroll-linked effects, driven by the scroll position itself (no JS).
+   Browsers without scroll timelines, and reduced-motion users, simply see the content. */
+@keyframes scroll-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes scroll-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(2.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes scroll-grow {
+  from {
+    opacity: 0.5;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes scroll-parallax {
+  from {
+    transform: translateY(-7%) scale(1.16);
+  }
+  to {
+    transform: translateY(7%) scale(1.16);
+  }
+}
+
+.scroll-progress {
+  transform: scaleX(0);
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      transform-origin: left;
+      animation: scroll-progress linear both;
+      animation-timeline: scroll(root);
+    }
+
+    /* Rises into place as it enters the bottom of the screen. */
+    .scroll-reveal {
+      animation: scroll-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+
+    /* Grows from slightly smaller to full size while it comes up the screen. */
+    .scroll-grow {
+      animation: scroll-grow linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+
+    /* Drifts slower than the page inside its (overflow-hidden) frame. */
+    .scroll-parallax {
+      animation: scroll-parallax linear both;
+      animation-timeline: view();
+    }
+  }
+}
+
 /* Carousels: the incoming slide slides and fades in over the outgoing one,
    which stays opaque underneath so the background never flashes through.
    --carousel-dir is 1 (forward) or -1 (back). */
@@ -219,9 +295,23 @@
   animation: carousel-out 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* For photos shown whole (not filling the frame), the outgoing one must also disappear,
+   or its edges would show around a narrower incoming photo. */
+@keyframes carousel-fade-out {
+  to {
+    opacity: 0;
+    transform: translateX(calc(var(--carousel-dir, 1) * -3%));
+  }
+}
+
+.carousel-fade-out {
+  animation: carousel-fade-out 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .carousel-in,
-  .carousel-out {
+  .carousel-out,
+  .carousel-fade-out {
     animation-duration: 1ms;
   }
 }
